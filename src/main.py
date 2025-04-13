@@ -7,7 +7,7 @@ from flask import Flask, request, jsonify, Response, stream_with_context
 
 # init
 app = Flask(__name__)
-app.config['PROXY_KEY'] = os.getenv('PROXY_KEY')
+app.config['LLM_PROXY_KEY'] = os.getenv('LLM_PROXY_KEY')
 
 
 @app.route('/')
@@ -19,7 +19,7 @@ def service():
 def llm_generate():
     # check for API key in the request
     data = request.get_json()
-    if 'key' not in data or data['key'] != app.config['PROXY_KEY']:
+    if 'key' not in data or data['key'] != app.config['LLM_PROXY_KEY']:
         return jsonify({"error": "Invalid or missing API key"}), 401
     
     # remove key before forwarding to LLM
@@ -51,7 +51,7 @@ def llm_generate():
 def llm_chat():
     # check for API key in the request
     data = request.get_json()
-    if 'key' not in data or data['key'] != app.config['PROXY_KEY']:
+    if 'key' not in data or data['key'] != app.config['LLM_PROXY_KEY']:
         return jsonify({"error": "Invalid or missing API key"}), 401
     
     # remove key before forwarding to LLM
