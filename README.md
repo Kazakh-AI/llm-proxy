@@ -16,6 +16,9 @@ pip install -r ./requirements.txt
 
 # run app with gunicorn
 export LLM_PROXY_KEY="your_key"; gunicorn -w 4 -b 0.0.0.0:8004 src.main:app
+
+# run app in background with unicorn
+# export LLM_PROXY_KEY="your_key"; nohup gunicorn -w 4 -b 0.0.0.0:8004 src.main:app > llm-proxy.log 2>&1 &
 ```
 
 ### LLM requests
