@@ -16,11 +16,11 @@ pip install -r ./requirements.txt
 
 # run app with gunicorn
 export LLM_PROXY_KEY="your_key"
-gunicorn -w 4 -b 0.0.0.0:8004 src.main:app
+gunicorn -w 4 -b 0.0.0.0:8004 --timeout 300 src.main:app
 
 # run app in background with unicorn
 # export LLM_PROXY_KEY="your_key"
-# nohup gunicorn -w 4 -b 0.0.0.0:8004 src.main:app > llm-proxy.log 2>&1 &
+# nohup gunicorn -w 4 -b 0.0.0.0:8004 --timeout 300 src.main:app > llm-proxy.log 2>&1 &
 ```
 
 ### LLM requests
@@ -61,11 +61,11 @@ Response:
 curl http://localhost:8004/api/chat -H "Content-Type: application/json" -d '{
     "model": "model_name",
     "messages": [
-        {                   
+        {
             "role": "user",
             "content": "why is the sky blue?"
         }
-    ], 
+    ],
     "stream": false,
     "key": "your_key"
 }'
@@ -100,5 +100,4 @@ Response:
 
 
 ## LICENSE
-All code is licensed under the MIT license. 
-
+All code is licensed under the MIT license.
