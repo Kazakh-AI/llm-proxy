@@ -23,6 +23,11 @@ gunicorn -w 4 -b 0.0.0.0:8004 --timeout 300 src.main:app
 # nohup gunicorn -w 4 -b 0.0.0.0:8004 --timeout 300 src.main:app > llm-proxy.log 2>&1 &
 ```
 
+You can also force override the model being used:
+```sh
+export LLM_MODEL_NAME="ollama_model_name"
+```
+
 ### LLM requests
 It's the same format as described in [ollama](https://github.com/ollama/ollama/blob/main/docs/api.md) documentation. There are only two differences:
 1. Add content type headers

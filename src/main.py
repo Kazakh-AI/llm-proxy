@@ -8,6 +8,7 @@ from flask import Flask, request, jsonify, Response, stream_with_context
 # init
 app = Flask(__name__)
 app.config['LLM_PROXY_KEY'] = os.getenv('LLM_PROXY_KEY')
+app.config['LLM_MODEL_NAME'] = os.getenv('LLM_MODEL_NAME')
 
 
 @app.route('/')
@@ -27,6 +28,10 @@ def llm_generate():
 
     # check if client wants streaming
     stream = data.get("stream", True)
+    
+    # override model if specified
+    if app.config['LLM_MODEL_NAME']:
+        data['model'] = app.config['LLM_MODEL_NAME']
     
     # generate result
     try:
@@ -60,6 +65,10 @@ def llm_chat():
     # check if client wants streaming
     stream = data.get("stream", True)
     
+    # override model if specified
+    if app.config['LLM_MODEL_NAME']:
+        data['model'] = app.config['LLM_MODEL_NAME']
+
     # generate result
     try:
         if stream:
