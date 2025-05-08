@@ -25,7 +25,7 @@ gunicorn -w 4 -b 0.0.0.0:8004 --timeout 300 src.main:app
 
 You can also force override the model being used:
 ```sh
-export LLM_MODEL_NAME="ollama_model_name"
+export LLM_PROXY_MODEL_NAME="ollama_model_name"
 ```
 
 ### LLM requests
